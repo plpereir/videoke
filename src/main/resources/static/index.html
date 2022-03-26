@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <link rel="icon" href="/img/thevoice.png" type="image/x-icon">
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+</head>
+<title>Videoke - The Voice Family and Friends</title>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <div class="head">
+        <div class="row-fluid">
+            <div class="span12">
+                <img src="/img/thevoice.png" height="5%" width="5%"/>
+                <div class="span10">
+                 <h1 class="muted">Videoke - The Voice Family and Friends</h1>
+                </div>
+            </div>
+        </div>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                    <!--  -
+                        <li>
+                            <a data-toggle="modal" href="#myModal">Vamos Cantar?</a>
+                        </li>
+                        -->
+
+                        <li>
+                            <a data-toggle="modal" href="#myPlayList">Repertório</a>
+                        </li>
+                    </ul>
+                    
+         <div class="modal hide" id="myModal" style="height:80%;width:80%;margin-left:-40%">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h3>Login to MyWebsite.com</h3>
+          </div>
+          <div class="modal-body">
+            <form method="post" action='' name="login_form">
+              <p><input type="text" class="span3" name="eid" id="email" placeholder="Email"></p>
+              <p><input type="password" class="span3" name="passwd" placeholder="Password"></p>
+              <p><button type="submit" class="btn btn-primary">Sign in</button>
+                <a href="#">Forgot Password?</a>
+              </p>
+            </form>
+          </div>
+          <div class="modal-footer">
+            New To MyWebsite.com?
+            <a href="#" class="btn btn-primary">Register</a>
+          </div>
+        </div>	  
+        
+        <div class="modal hide" id="myPlayList" style="height:80%;width:80%;margin-left:-40%">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h4>Nosso repertório:</h4>
+          </div>
+          <div class="modal-body">
+
+              <p><input type="text" style="height:30px;margin-top:15px"  class="span6" name="txtSearch" id="txtSearch" placeholder="Digite a música que deseja encontrar"/>  <button onclick="searchMovies()" type="button" class="btn btn-primary">Buscar</button></p>
+          <div id=listSongs>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>	  
+                    
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+	<video style="display:none;" id="player" src="/video/yt1s.io-Ministério Adoração e Vida - Abraço de Pai-(480p).mp4" controls height="75%" width="100%">
+	</video>
+	<div id="playYoutube">
+	
+	</div>
+	
+  <hr>
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="nav nav-pills nav-justified nav-rigth">
+                <li><a href="https://www.linkedin.com/in/pedro-luiz-da-silva-pereira/" target="_blank"> © 2022 Pedro Pereira</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script type="text/javascript">
+
+
+
+function loadYoutube(tmpYoutube)
+{
+	var s="<iframe width='100%' height='600px' src='https://www.youtube.com/embed/"+tmpYoutube+"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+	document.getElementById("playYoutube").innerHTML = s;
+	$('#myPlayList').modal('hide');
+}
+
+
+function searchMovies()
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/movies/findbytitle/"+txtSearch.value, false ); // false for synchronous request
+    xmlHttp.send( null );
+    const data = JSON.parse(xmlHttp.responseText);
+    /*
+    data.forEach(obj => {
+        Object.entries(obj).forEach(([key, value]) => {
+            console.log(`${key} ${value}`);
+        });
+        console.log('-------------------');
+    });
+    */
+    var tmp="";
+
+    data.forEach(obj => {
+        Object.entries(obj).forEach(([key, value]) => {
+        	if (key=='movieId') 
+        		{ 					
+        		 	tmp += " <button onclick='loadYoutube(&quot;"+value+"&quot;)' type='button' class='btn btn-primary'>Selecionar</button> - ";
+        		}
+        	if (key=='movieTitle') 
+    			{
+    		 		tmp += value+"<hr>";
+    			}
+        });
+    });
+    
+
+    document.getElementById("listSongs").innerHTML = tmp;
+
+}
+</script>
+</html>
+
