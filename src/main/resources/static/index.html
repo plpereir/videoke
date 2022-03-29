@@ -1,113 +1,291 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8">
- <link rel="icon" href="/img/thevoice.png" type="image/x-icon">
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<link rel="icon" href="/img/thevoice.png" type="image/x-icon">
+<link
+	href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 </head>
 <title>Videoke - The Voice Family and Friends</title>
 <body>
-<div class="container">
-  <div class="row">
-    <div class="span12">
-      <div class="head">
-        <div class="row-fluid">
-            <div class="span12">
-                <img src="/img/thevoice.png" height="5%" width="5%"/>
-                <div class="span10">
-                 <h1 class="muted">Videoke - The Voice Family and Friends</h1>
-                </div>
-            </div>
-        </div>
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <ul class="nav">
-                    <!--  -
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div class="head">
+					<div class="row-fluid">
+						<div class="span12">
+							<img src="/img/thevoice.png" height="5%" width="5%" />
+							<div class="span10">
+								<h1 class="muted">
+									<a href="index.html">Videoke - The Voice Family and Friends</a>
+								</h1>
+							</div>
+						</div>
+					</div>
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="container">
+								<ul class="nav">
+									<!--  -
                         <li>
                             <a data-toggle="modal" href="#myModal">Vamos Cantar?</a>
                         </li>
                         -->
 
-                        <li>
-                            <a data-toggle="modal" href="#myPlayList">Repertório</a>
-                        </li>
-                    </ul>
-                    
-         <div class="modal hide" id="myModal" style="height:80%;width:80%;margin-left:-40%">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">x</button>
-            <h3>Login to MyWebsite.com</h3>
-          </div>
-          <div class="modal-body">
-            <form method="post" action='' name="login_form">
-              <p><input type="text" class="span3" name="eid" id="email" placeholder="Email"></p>
-              <p><input type="password" class="span3" name="passwd" placeholder="Password"></p>
-              <p><button type="submit" class="btn btn-primary">Sign in</button>
-                <a href="#">Forgot Password?</a>
-              </p>
-            </form>
-          </div>
-          <div class="modal-footer">
-            New To MyWebsite.com?
-            <a href="#" class="btn btn-primary">Register</a>
-          </div>
-        </div>	  
-        
-        <div class="modal hide" id="myPlayList" style="height:80%;width:80%;margin-left:-40%">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">x</button>
-            <h4>Nosso repertório:</h4>
-          </div>
-          <div class="modal-body">
+									<li><a data-toggle="modal" href="#myPlayList">Repertório</a>
+									</li>
+									<li><a data-toggle="modal" href="#addNewMusics">Adicionar
+											Novas Músicas</a></li>
+								</ul>
 
-              <p><input type="text" style="height:30px;margin-top:15px"  class="span6" name="txtSearch" id="txtSearch" placeholder="Digite a música que deseja encontrar"/>  <button onclick="searchMovies()" type="button" class="btn btn-primary">Buscar</button></p>
-          <div id=listSongs>
-          </div>
-          <div class="modal-footer">
-          </div>
-        </div>	  
-                    
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-	<video style="display:none;" id="player" src="/video/yt1s.io-Ministério Adoração e Vida - Abraço de Pai-(480p).mp4" controls height="75%" width="100%">
-	</video>
-	<div id="playYoutube">
-	
-	</div>
-	
-  <hr>
-    <div class="row">
-        <div class="col-lg-12">
-            <ul class="nav nav-pills nav-justified nav-rigth">
-                <li><a href="https://www.linkedin.com/in/pedro-luiz-da-silva-pereira/" target="_blank"> © 2022 Pedro Pereira</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-</div>
+								<div class="modal hide" id="myModal"
+									style="height: 80%; width: 80%; margin-left: -40%">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<h3>Login to MyWebsite.com</h3>
+									</div>
+									<div class="modal-body">
+										<form method="post" action='' name="login_form">
+											<p>
+												<input type="text" class="span3" name="eid" id="email"
+													placeholder="Email">
+											</p>
+											<p>
+												<input type="password" class="span3" name="passwd"
+													placeholder="Password">
+											</p>
+											<p>
+												<button type="submit" class="btn btn-primary">Sign
+													in</button>
+												<a href="#">Forgot Password?</a>
+											</p>
+										</form>
+									</div>
+									<div class="modal-footer">
+										New To MyWebsite.com? <a href="#" class="btn btn-primary">Register</a>
+									</div>
+								</div>
+
+								<div class="modal hide" id="addNewMusics">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											onclick="closeDiv()">x</button>
+										<h4>Cole o endereço do video aqui para cadastrar:</h4>
+									</div>
+									<div class="modal-body">
+										<form method="post" action='' name="login_form">
+											<p>
+												<input type="text" class="span3" name="youtubeMusic"
+													id="youtubeMusic"
+													placeholder="Cole o endereço do video aqui">
+											</p>
+											<p>
+												<button type="button" class="btn btn-primary"
+													onclick="loadYoutubeMusic()">Cadastrar</button>
+											</p>
+										</form>
+									</div>
+									<div id="listLoadingItemMusic" style="display: none;"
+										align="center">
+										<img src="/img/loading.gif" />
+									</div>
+									<div class="modal-body" id="itemMusic" style="display: none;">
+									</div>
+									<div class="modal-footer"></div>
+								</div>
+
+
+
+								<div class="modal hide" id="myPlayList"
+									style="height: 80%; width: 80%; margin-left: -40%">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<h4>Nosso repertório:</h4>
+										<p>
+											<input type="text" style="height: 30px; margin-top: 15px"
+												class="span6" name="txtSearch" id="txtSearch"
+												placeholder="Digite a música que deseja encontrar" />
+											<button onclick="searchMovies()" type="button"
+												class="btn btn-primary">Buscar</button>
+										</p>
+
+									</div>
+									<div class="modal-body" style="min-height: 400px;">
+
+										<div id="listSongs" style="display: none;"></div>
+										<div id="listLoading" style="display: none;" align="center">
+											<img src="/img/loading.gif" />
+										</div>
+										<div class="modal-footer">Fim da lista de músicas
+											encontradas!</div>
+									</div>
+								</div>
+								<div class="modal hide" id="myPlayListDeleteDatabase"
+									style="height: 80%; width: 80%; margin-left: -40%;">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<h4>Selecione o video a ser deletado da base de
+											repertório:</h4>
+										<p>
+											<input type="text" style="height: 30px; margin-top: 15px"
+												class="span6" name="txtSearchDelete" id="txtSearchDelete"
+												placeholder="Digite a música que deseja encontrar para deletar" />
+											<button onclick="searchMoviesDelete()" type="button"
+												class="btn btn-primary">Buscar</button>
+										</p>
+
+									</div>
+									<div class="modal-body" style="min-height: 400px;">
+
+										<div id="listSongsDelete" style="display: none;"></div>
+										<div id="listLoadingDelete" style="display: none;"
+											align="center">
+											<img src="/img/loading.gif" />
+										</div>
+										<div class="modal-footer">Fim da lista de músicas
+											encontradas!</div>
+									</div>
+
+								</div>
+
+								<div class="modal hide" tabindex="-1" role="dialog"
+									id="myModalConfirmDeletion">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Confirma a deleção do video
+													abaixo:</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div id="videoDeletionID" style="display: block"></div>
+												<div id="videoDeletionTitle" style="display: block"></div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-danger"
+													onclick='deleteYoutube()'>SIM, confirmo a deleção
+												</button>
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Fechar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<video style="display: none;" id="player"
+					src="/video/yt1s.io-Ministério Adoração e Vida - Abraço de Pai-(480p).mp4"
+					controls height="75%" width="100%">
+				</video>
+				<div id="playYoutube" style="display: none;"></div>
+				<div id="initalPlayer" style="display: block;" align="center">
+					<img src="/img/singers.png" />
+				</div>
+
+				<hr>
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="nav nav-pills nav-justified nav-rigth">
+							<li><a
+								href="https://www.linkedin.com/in/pedro-luiz-da-silva-pereira/"
+								target="_blank"> © 2022 Pedro Pereira</a></li>
+							<li><a data-toggle="modal" href="#myPlayListDeleteDatabase">Deletar
+									video da base de dados</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 <script type="text/javascript">
 
+function closeDiv()
+{
+	document.getElementById("itemMusic").style.display = 'none';
+	document.getElementById("listLoadingItemMusic").style.display = 'none';
+	youtubeMusic.value='';
+}
 
+function loadYoutubeMusic()
+{
+	document.getElementById("itemMusic").style.display = 'none';
+	document.getElementById("listLoadingItemMusic").style.display = 'block';
+	
+	var temp="";
+	let data = {'id':null,
+				'nextPageToken':null,
+				'movieId':null,
+				'movieTitle':null,
+				'channelId':null,
+				'channelTitle':null,
+				'url': youtubeMusic.value};
+
+	fetch("/movies/new", {
+	  method: "POST",
+	  headers: {'Content-Type': 'application/json'}, 
+	  body: JSON.stringify(data)
+	}).then(function(response) {
+	    // The response is a Response instance.
+	    // You parse the data into a useable format using `.json()`
+	    return response.json();
+	  }).then(function(data) {
+	    // `data` is the parsed version of the JSON returned from the above endpoint.
+	    console.log(data.movieID);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+	    console.log(data.title);
+	    console.log(data.Status);
+	    console.log(data.status);
+	    
+	    if(data.status==null)
+	    	{
+    			temp +=  "<div class='alert alert-primary' role='alert'>";
+    			temp +=  data.Status+" ;-)";
+    			temp +=  "</div>";
+    		
+    			temp += "<div class='container'><p><b>ID do vídeo: </b>"+data.movieID+"</p>";
+			    temp += "<p><b>Title do vídeo: </b>"+data.title+"</p></div>";
+
+			    
+	    		document.getElementById("itemMusic").innerHTML = temp;
+	    		document.getElementById("itemMusic").style.display = 'block';
+	    		document.getElementById("listLoadingItemMusic").style.display = 'none';
+	    	}else
+	    		{
+		    		temp +=  "<div class='alert alert-danger' role='alert'>";
+		    		temp +=  "Não foi possível cadastrar ou já havia o cadastro ;-(";
+		    		temp +=  "</div>";
+		    		document.getElementById("itemMusic").innerHTML = temp;
+		    		document.getElementById("itemMusic").style.display = 'block';
+		    		document.getElementById("listLoadingItemMusic").style.display = 'none';
+	    		}
+	  });
+}
 
 function loadYoutube(tmpYoutube)
 {
 	var s="<iframe width='100%' height='600px' src='https://www.youtube.com/embed/"+tmpYoutube+"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
 	document.getElementById("playYoutube").innerHTML = s;
+	document.getElementById("playYoutube").style.display = 'block';
+	document.getElementById("initalPlayer").style.display = 'none';
+	
 	$('#myPlayList').modal('hide');
 }
 
 
 function searchMovies()
 {
+	document.getElementById("listSongs").style.display = 'none';
+	document.getElementById("listLoading").style.display = 'block';
+	
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", "/movies/findbytitle/"+txtSearch.value, false ); // false for synchronous request
     xmlHttp.send( null );
@@ -120,12 +298,16 @@ function searchMovies()
         console.log('-------------------');
     });
     */
-    var tmp="";
-
+    var qtd = 0;
+    var tmp = "";
+    var tmpStr = "";
+    
     data.forEach(obj => {
         Object.entries(obj).forEach(([key, value]) => {
         	if (key=='movieId') 
-        		{ 					
+        		{ 			
+        			console.log(new Date().getTime());
+        			qtd +=1;
         		 	tmp += " <button onclick='loadYoutube(&quot;"+value+"&quot;)' type='button' class='btn btn-primary'>Selecionar</button> - ";
         		}
         	if (key=='movieTitle') 
@@ -135,10 +317,117 @@ function searchMovies()
         });
     });
     
+    if (tmp.length == 0)
+    	{
+    		tmpStr +=  "<div class='alert alert-danger' role='alert'>";
+    		tmpStr +=  "Não encontramos sua música ;-(";
+    		tmpStr +=  "</div>";
+    	}else
+    		{
+    			tmpStr +=  "<div class='alert alert-primary' role='alert'>";
+    			tmpStr +=  "Encontramos " +qtd+ " músicas relacionadas ;-):";
+    			tmpStr +=  "</div>" + tmp;
+    		}
 
-    document.getElementById("listSongs").innerHTML = tmp;
+    document.getElementById("listSongs").innerHTML = tmpStr;
+	document.getElementById("listSongs").style.display = 'block';
+	document.getElementById("listLoading").style.display = 'none';
 
 }
+
+function deleteYoutube()
+{
+	document.getElementById("listSongsDelete").style.display = 'none';
+	document.getElementById("listLoadingDelete").style.display = 'block';
+	
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/movies/delete/"+document.getElementById("videoDeletionID").innerText, false ); // false for synchronous request
+    xmlHttp.send( null );
+    const data = JSON.parse(xmlHttp.responseText);
+    
+    var tmpStr = "";
+    
+	tmpStr +=  "<div class='alert alert-danger' role='alert'>";
+	tmpStr +=  data.status;
+	tmpStr +=  "</div>";
+    
+    document.getElementById("listSongsDelete").innerHTML = tmpStr;
+	document.getElementById("listSongsDelete").style.display = 'block';
+	document.getElementById("listLoadingDelete").style.display = 'none';
+
+}
+
+function selectDeleteMovies(idMovie,titleMovie)
+{
+	document.getElementById("videoDeletionID").innerText = idMovie;
+	document.getElementById("videoDeletionTitle").innerText = titleMovie;
+}
+
+function searchMoviesDelete()
+{
+	document.getElementById("listSongsDelete").style.display = 'none';
+	document.getElementById("listLoadingDelete").style.display = 'block';
+	
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/movies/findbytitle/"+txtSearchDelete.value, false ); // false for synchronous request
+    xmlHttp.send( null );
+    const data = JSON.parse(xmlHttp.responseText);
+    /*
+    data.forEach(obj => {
+        Object.entries(obj).forEach(([key, value]) => {
+            console.log(`${key} ${value}`);
+        });
+        console.log('-------------------');
+    });
+    */
+    var qtd = 0;
+    var tmp = "";
+    var tmpStr = "";
+    
+    data.forEach(obj => {
+        Object.entries(obj).forEach(([key, value]) => {
+        	if (key=='movieId') 
+        		{ 			
+        			console.log(new Date().getTime());
+        			qtd +=1;
+        		 	tmp += " <button onclick='selectDeleteMovies(&quot;"+value+"&quot;,";
+        		}
+        	if (key=='movieTitle') 
+    			{
+    		 		tmp += "&quot;"+value+"&quot;)' type='button' class='btn btn-danger' href='#myModalConfirmDeletion' data-toggle='modal' >Deletar</button> - "+value+"<hr>";
+    			}
+        });
+    });
+    
+    if (tmp.length == 0)
+    	{
+    		tmpStr +=  "<div class='alert alert-danger' role='alert'>";
+    		tmpStr +=  "Não encontramos sua música ;-(";
+    		tmpStr +=  "</div>";
+    	}else
+    		{
+    			tmpStr +=  "<div class='alert alert-primary' role='alert'>";
+    			tmpStr +=  "Encontramos " +qtd+ " músicas relacionadas ;-):";
+    			tmpStr +=  "</div>" + tmp;
+    		}
+
+
+	
+    document.getElementById("listSongsDelete").innerHTML = tmpStr;
+	document.getElementById("listSongsDelete").style.display = 'block';
+	document.getElementById("listLoadingDelete").style.display = 'none';
+
+}
+
+</script>
+<script>
+var input = document.getElementById("txtSearch");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   searchMovies();
+  }
+});
 </script>
 </html>
 
