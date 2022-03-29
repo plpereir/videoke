@@ -46,4 +46,34 @@ public class GsonUtilities {
 		}
 		return modelMovieList;
 	}
+	
+	
+	public com.videoke.thevoicefamily.model.music.Root ParsingGsonToRootYoutubeMusic(String json) {
+		Gson gson = new Gson();
+
+		com.videoke.thevoicefamily.model.music.Root root = gson.fromJson(json, com.videoke.thevoicefamily.model.music.Root.class);
+
+		return root;
+	}
+
+	public List<ModelMovie> ParsingRootToModelMovieYoutubeMusic(com.videoke.thevoicefamily.model.music.Root root) throws SQLException {
+		List<ModelMovie> modelMovieList = new ArrayList<ModelMovie>();
+
+		for (com.videoke.thevoicefamily.model.music.Item item : root.items) {
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			Long id = timestamp.getTime();
+			
+			ModelMovie modelMovie = new ModelMovie();
+
+			modelMovie.setNextPageToken("Single movie");
+			modelMovie.setId(id);
+			modelMovie.setChannelId(item.getSnippet().getChannelId());
+			modelMovie.setChannelTitle(item.getSnippet().getChannelTitle());
+			modelMovie.setMovieId(item.getId());
+			modelMovie.setMovieTitle(item.getSnippet().getTitle());
+
+			modelMovieList.add(modelMovie);
+		}
+		return modelMovieList;
+	}
 }

@@ -29,4 +29,13 @@ public interface RepositoryMovie  extends JpaRepository<ModelMovie, Long> {
     @Query(value =  "SELECT * FROM MOVIES where MOVIE_TITLE like %:MovieTitle%", nativeQuery = true)
     List<ModelMovie> findByMovieTitle(@Param("MovieTitle") String MovieTitle);
     
+    @Query(value =  "SELECT * FROM MOVIES where MOVIE_ID = :MovieId", nativeQuery = true)
+    List<ModelMovie> findByMovieId(@Param("MovieId") String MovieId);
+    
+    
+    @Modifying
+    @Query(value =  "DELETE FROM MOVIES  WHERE MOVIE_ID = :MovieId", nativeQuery = true)
+    @Transactional
+    void deleteMovie(@Param("MovieId") String MovieId);
+    
 }

@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -14,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.videoke.thevoicefamily.model.ModelMovie;
 
 public class UtilitiesMovie {
-	Logger logger = LoggerFactory.getLogger(UtilitiesMovie.class);
+	static Logger logger = LoggerFactory.getLogger(UtilitiesMovie.class);
 
 	private String generateLine(ModelMovie modelMovie) {
 		return (modelMovie.getChannelTitle() + ";" + modelMovie.getChannelId() + ";" + modelMovie.getMovieId() + ";"
@@ -69,6 +71,34 @@ public class UtilitiesMovie {
 		{
 			return temp;
 		}
+	}
+	
+	public static String getMovieIDFromURL(String tmp) throws MalformedURLException
+	{
+		if (tmp.contains("https://youtu.be/"))
+		{
+			logger.info(tmp.replace("https://youtu.be/",""));
+			return tmp.replace("https://youtu.be/","");
+		}
+		else
+		{
+			URL tempURL = new URL(tmp);
+			String temp = tempURL.getQuery()+"&";
+			temp = temp.replace("&&", "&");
+			
+		    String[] params = temp.split("&");     
+		    for (String param : params) {   
+		       String name = param.split("=")[0];
+		       if ("v".equals(name)) {
+		    	   logger.info(param.split("=")[1]);
+		           return param.split("=")[1]; 
+		       }else
+		       {	    	   
+		    	   return null;
+		       }
+			}			
+		}
+		return null;
 	}
 
 }

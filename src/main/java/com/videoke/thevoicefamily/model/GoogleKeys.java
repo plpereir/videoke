@@ -53,7 +53,23 @@ public class GoogleKeys {
 			channelList.add("UCRKCTVnBNVX9jDDNaFhPk1A");
 			channelList.add("UCb87w2HwzMiTSWJpgQgXJFQ");
 			channelList.add("UCOy5M5xosCqqPYNGRzISBpw");
-			channelList.add("UCWPGipZ9-ktXUtvSac2209g");	
+			channelList.add("UCWPGipZ9-ktXUtvSac2209g");
+			
+			//https://www.youtube.com/channel/UCRKXh0dGLgIOc2lbzZG2pmg
+			//https://www.youtube.com/channel/UCcC75odpvQGI63SflLmcx7Q
+			//https://www.youtube.com/channel/UCBNZrPqmJYXQSUkUgIVgLng
+			//https://www.youtube.com/channel/UCbWgVCxEt6mYu2GVOMtKd1A
+			//https://www.youtube.com/channel/UCSk6hkasRGZJwNRa8JkBI2g
+			//https://www.youtube.com/channel/UCs7Z6uI9Xg14SetotHlNpfA
+			//https://www.youtube.com/channel/UCUVVt6U7Qyk5ifrFP55GQ2A
+			//https://www.youtube.com/channel/UCbqcG1rdt9LMwOJN4PyGTKg
+			//https://www.youtube.com/channel/UCKPUll_mEogOAlx58672Vww
+			
+			//https://www.youtube.com/channel/UCily2V-y7V1Mrj3JewFTYDQ (fazer)
+			//https://www.youtube.com/channel/UCBNZrPqmJYXQSUkUgIVgLng (fazer)
+			//https://www.youtube.com/channel/UC90F1AbHAWq2Y5qx5okFfXg (fazer)
+			
+			
 			//https://www.youtube.com/channel/UCEseG660SA_TGc9o5VGcXSw
 			//https://www.youtube.com/channel/UCS88MWJ-SwKfYNS_zDi4xuQ
 			//https://www.youtube.com/channel/UC8ePOKxbr65St7MtpsEXpLQ
