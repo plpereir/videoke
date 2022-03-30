@@ -22,7 +22,7 @@
 							<img src="/img/thevoice.png" height="5%" width="5%" />
 							<div class="span10">
 								<h1 class="muted">
-									<a href="index.html">Videoke - The Voice Family and Friends</a>
+									<a href="index.html">Videoke</a> - The Voice Family and Friends
 								</h1>
 							</div>
 						</div>
@@ -31,50 +31,65 @@
 						<div class="navbar-inner">
 							<div class="container">
 								<ul class="nav">
-									<!--  -
-                        <li>
-                            <a data-toggle="modal" href="#myModal">Vamos Cantar?</a>
-                        </li>
-                        -->
-
-									<li><a data-toggle="modal" href="#myPlayList">Repertório</a>
+									<li><a data-toggle="modal" href="#myPlayList" onclick="clearRepertorio();">Repertório</a>
 									</li>
-									<li><a data-toggle="modal" href="#addNewMusics">Adicionar
-											Novas Músicas</a></li>
+									<li><a data-toggle="modal" href="#addPlayList" onclick="searchSingers()">Lista de Apresentações</a></li>
+									<li><a data-toggle="modal" href="#addNewMusics">Adicionar novas Músicas no Repertório</a></li>
 								</ul>
-
-								<div class="modal hide" id="myModal"
+								
+								<div class="modal hide" id="addPlayList"
 									style="height: 80%; width: 80%; margin-left: -40%">
 									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">x</button>
-										<h3>Login to MyWebsite.com</h3>
+										<button type="button" class="close" data-dismiss="modal" >x</button>
+										<h4>Sequência de apresentacões:</h4>
 									</div>
-									<div class="modal-body">
-										<form method="post" action='' name="login_form">
-											<p>
-												<input type="text" class="span3" name="eid" id="email"
-													placeholder="Email">
-											</p>
-											<p>
-												<input type="password" class="span3" name="passwd"
-													placeholder="Password">
-											</p>
-											<p>
-												<button type="submit" class="btn btn-primary">Sign
-													in</button>
-												<a href="#">Forgot Password?</a>
-											</p>
-										</form>
+									<div class="modal-body" style="min-height: 400px;">
+
+										<div id="listSingers" style="display: none;"></div>
+										<div id="listLoandingSingers" style="display: none;" align="center">
+											<img src="/img/loading.gif" />
+										</div>
+										<div class="modal-footer">Fim da lista de apresentações!</div>
 									</div>
-									<div class="modal-footer">
-										New To MyWebsite.com? <a href="#" class="btn btn-primary">Register</a>
+								</div>
+								
+								<div class="modal hide" tabindex="-1" role="dialog"
+									id="myModalConfirmAddList">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Confirma a inclusão do vídeo na lista lista de apresentação?</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<b>Código da Música: </b>
+												<div id="videoAddListID" style="display: block"></div>
+												<b>Título da Música: </b>
+												<div id="videoAddListTitle" style="display: block"></div>
+												<br>
+												<b>Digite seu nome:</b>
+												<p><input type="text" class="span3" name="yourNameHere"
+													id="yourNameHere"
+													placeholder="Digite seu nome aqui"></p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-success"
+													onclick='addListYoutube()'>SIM, confirmo a Inclusão
+												</button>
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Fechar</button>
+											</div>
+										</div>
 									</div>
 								</div>
 
 								<div class="modal hide" id="addNewMusics">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal"
-											onclick="closeDiv()">x</button>
+											onclick="closeDiv();loadGif();">x</button>
 										<h4>Cole o endereço do video aqui para cadastrar:</h4>
 									</div>
 									<div class="modal-body">
@@ -103,8 +118,9 @@
 
 								<div class="modal hide" id="myPlayList"
 									style="height: 80%; width: 80%; margin-left: -40%">
+								
 									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">x</button>
+										<button type="button" class="close" data-dismiss="modal" >x</button>
 										<h4>Nosso repertório:</h4>
 										<p>
 											<input type="text" style="height: 30px; margin-top: 15px"
@@ -125,10 +141,14 @@
 											encontradas!</div>
 									</div>
 								</div>
+								
+								
+								
+								
 								<div class="modal hide" id="myPlayListDeleteDatabase"
 									style="height: 80%; width: 80%; margin-left: -40%;">
 									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">x</button>
+										<button type="button" class="close" data-dismiss="modal" >x</button>
 										<h4>Selecione o video a ser deletado da base de
 											repertório:</h4>
 										<p>
@@ -199,13 +219,14 @@
 							<li><a
 								href="https://www.linkedin.com/in/pedro-luiz-da-silva-pereira/"
 								target="_blank"> © 2022 Pedro Pereira</a></li>
-							<li><a data-toggle="modal" href="#myPlayListDeleteDatabase">Deletar
+							<li><a data-toggle="modal" href="#myPlayListDeleteDatabase" onclick="clearDeletar();">Deletar
 									video da base de dados</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>	
 </body>
 <script type="text/javascript" src="js/customFunctions.js" >
 </script>

@@ -1,9 +1,30 @@
 
+
+
 function closeDiv()
 {
 	document.getElementById("itemMusic").style.display = 'none';
 	document.getElementById("listLoadingItemMusic").style.display = 'none';
 	youtubeMusic.value='';
+}
+
+function clearRepertorio()
+{
+document.getElementById("txtSearch").value='';
+document.getElementById("listSongs").style.display = 'none';
+document.getElementById("listLoading").style.display = 'none';
+}
+
+function clearDeletar()
+{
+document.getElementById("txtSearchDelete").value='';
+document.getElementById("listSongsDelete").style.display = 'none';
+document.getElementById("listLoadingDelete").style.display = 'none';
+}
+
+function clearNewMusics()
+{
+document.getElementById("youtubeMusic").value='';
 }
 
 function loadYoutubeMusic()
@@ -68,6 +89,86 @@ function loadYoutube(tmpYoutube)
 	document.getElementById("initalPlayer").style.display = 'none';
 	
 	$('#myPlayList').modal('hide');
+	$('#addPlayList').modal('hide');
+}
+
+function deleteSingerList(tmpRequestNumber)
+{
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/songs/deleteByRequestNumber/"+tmpRequestNumber, false ); // false for synchronous request
+    xmlHttp.send( null );
+   
+   searchSingers();   
+}
+
+function addListYoutube()
+{
+	$('#myModalConfirmAddList').modal('hide');
+	
+	let time = new Date().getTime();
+	let data = {'requestNumber':time,
+				'name':yourNameHere.value,
+				'songTitle':videoAddListTitle.innerText,
+				'songID':videoAddListID.innerText};
+	
+	console.log(data);
+
+	fetch("/songs/new", {
+	  method: "POST",
+	  headers: {'Content-Type': 'application/json'}, 
+	  body: JSON.stringify(data)
+	}).then(function(response) {
+	    // The response is a Response instance.
+	    // You parse the data into a useable format using `.json()`
+	    return response.json();
+	  }).then(function(data) {
+	    // `data` is the parsed version of the JSON returned from the above endpoint.
+	    console.log(data);
+	    searchSingers();
+	    document.getElementById("yourNameHere").value = '';
+	  });
+    
+    
+    
+   
+    $('#addPlayList').modal('show');
+    searchSingers();
+}
+
+
+function searchSingers()
+{
+	var tmp = "";
+	var req = "";
+	document.getElementById("listSingers").style.display = 'none';
+	document.getElementById("listLoandingSingers").style.display = 'block';
+	
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/songs/findall", false ); // false for synchronous request
+    xmlHttp.send( null );
+    const data = JSON.parse(xmlHttp.responseText);
+	    
+    data.forEach(obj => {
+        Object.entries(obj).forEach(([key, value]) => {
+            console.log(`${key} ${value}`);
+            if (key=="requestNumber")
+            { req = value;
+              tmp += "<button style='margin-top:-15px;' onclick='deleteSingerList(&quot;"+value+"&quot;)' type='button' class='btn btn-danger'>Remover da Lista</button> - "; 
+			}
+			if (key=="songID")
+			tmp +=  "<button style='margin-top:-15px;' onclick='loadYoutube(&quot;"+value+"&quot;); deleteSingerList(&quot;"+req+"&quot;)' type='button' class='btn btn-success'>Tocar Música</button>  - ";
+             if (key=="name")
+			tmp += "<b style='font-size: 1.6rem;'>"+value +"</b> - ";
+			if (key=="songTitle")
+			tmp += value + "<hr>";
+       });
+        console.log('-------------------');
+    });
+    
+    document.getElementById("listSingers").innerHTML = tmp;
+	document.getElementById("listSingers").style.display = 'block';
+	document.getElementById("listLoandingSingers").style.display = 'none';
+        
 }
 
 
@@ -98,11 +199,11 @@ function searchMovies()
         		{ 			
         			console.log(new Date().getTime());
         			qtd +=1;
-        		 	tmp += " <button onclick='loadYoutube(&quot;"+value+"&quot;)' type='button' class='btn btn-primary'>Selecionar</button> - ";
+        		 	tmp += " <button onclick='selectAddListMovies(&quot;"+value+"&quot;,";
         		}
         	if (key=='movieTitle') 
     			{
-    		 		tmp += value+"<hr>";
+    		 		tmp += "&quot;"+value+"&quot;)' type='button' class='btn btn-primary' href='#myModalConfirmAddList' data-toggle='modal' >Selecionar</button> - "+value+"<hr>";
     			}
         });
     });
@@ -152,6 +253,17 @@ function selectDeleteMovies(idMovie,titleMovie)
 	document.getElementById("videoDeletionID").innerText = idMovie;
 	document.getElementById("videoDeletionTitle").innerText = titleMovie;
 }
+
+function selectAddListMovies(idMovie,titleMovie)
+{
+	
+	$('#myPlayList').modal('hide');
+	$('#addPlayList').modal('hide');
+	
+	document.getElementById("videoAddListID").innerText = idMovie;
+	document.getElementById("videoAddListTitle").innerText = titleMovie;
+}
+
 
 function searchMoviesDelete()
 {
