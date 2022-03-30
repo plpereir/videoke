@@ -155,7 +155,7 @@ public class ControllerJSONMovie {
 			while (scan.hasNext()) {
 				tmp = tmp + scan.nextLine();
 			}
-
+			scan.close();
 			GsonUtilities gsonUtilities = new GsonUtilities();
 			modelMoviesList.addAll(gsonUtilities.ParsingRootToModelMovieYoutubeMusic(gsonUtilities.ParsingGsonToRootYoutubeMusic(tmp)));
 			

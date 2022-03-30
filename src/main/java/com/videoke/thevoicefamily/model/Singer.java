@@ -10,14 +10,32 @@ public class Singer {
 	@Id
 	@Column(name = "requestNumber")
 	private Long requestNumber;
+	@Column(name = "songID")
+	private String songID;
 	@Column(name = "name")
 	private String name;
-	@Column(name = "song")
-	private String song;
+	@Column(name = "songTitle")
+	private String songTitle;
 	
 	public Singer()
 	{
 		
+	}
+
+	public String getSongTitle() {
+		return songTitle;
+	}
+
+	public void setSongTitle(String songTitle) {
+		this.songTitle = songTitle;
+	}
+
+	public String getSongID() {
+		return songID;
+	}
+
+	public void setSongID(String songID) {
+		this.songID = songID;
 	}
 
 	public Long getRequestNumber() {
@@ -36,14 +54,5 @@ public class Singer {
 		this.name = name;
 	}
 
-	public String getSong() {
-		return song;
-	}
-
-	public void setSong(String song) {
-		this.song = song;
-	}
-	
-	
 
 }
