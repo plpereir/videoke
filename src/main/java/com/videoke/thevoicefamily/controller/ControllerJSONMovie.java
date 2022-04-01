@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.videoke.thevoicefamily.configs.Configs;
 import com.videoke.thevoicefamily.model.ModelMovie;
 import com.videoke.thevoicefamily.model.URLYoutube;
 import com.videoke.thevoicefamily.repository.RepositoryMovie;
@@ -35,6 +36,8 @@ import com.videoke.thevoicefamily.utils.UtilitiesMovie;
 public class ControllerJSONMovie {
 	Logger logger = LoggerFactory.getLogger(ControllerJSONMovie.class);
 	
+	@Autowired
+	private Configs configs;
 	
 	@Autowired
 	private RepositoryMovie repositoryMovie;
@@ -80,14 +83,18 @@ public class ControllerJSONMovie {
 	
 	@GetMapping("")
     protected void doGet2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
-  
+		configs.readProperties();
+		
+		System.out.println(configs.getPath().toString());
+		
        response.sendRedirect("index.html"); 
     }  
 	
 	@GetMapping("/")
     protected void doGet(HttpServletRequest request, HttpServletResponse response)  
             throws ServletException, IOException {  
-  
+		configs.readProperties();
+		System.out.println(configs.getPath().toString());
 		response.sendRedirect("index.html"); 
     }  
 	
@@ -135,6 +142,13 @@ public class ControllerJSONMovie {
 		
 		return modelMoviesList;
 	}
+	
+	@GetMapping("movies/gettitlebyid/{Id}")
+	public String gettitlebyid(@PathVariable String Id)
+	{		
+		return repositoryMovie.gettitlebyid(Id);
+	}
+	
 	@PostMapping(path = "/movies/new", 
 	        	consumes = MediaType.APPLICATION_JSON_VALUE, 
 	        	produces = MediaType.APPLICATION_JSON_VALUE)

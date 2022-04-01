@@ -37,5 +37,8 @@ public interface RepositoryMovie  extends JpaRepository<ModelMovie, Long> {
     @Query(value =  "DELETE FROM MOVIES  WHERE MOVIE_ID = :MovieId", nativeQuery = true)
     @Transactional
     void deleteMovie(@Param("MovieId") String MovieId);
-    
+
+    @Query(value =  "SELECT MOVIE_TITLE FROM MOVIES where MOVIE_ID = :MovieId", nativeQuery = true)
+    String gettitlebyid(@Param("MovieId") String MovieId);
+
 }
