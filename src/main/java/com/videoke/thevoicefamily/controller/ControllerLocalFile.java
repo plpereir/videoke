@@ -61,7 +61,16 @@ public class ControllerLocalFile {
 				}
 			}
 		}
-		return map;		
+
+		if (map.size()>0)
+		{
+			return map;		
+		}else
+		{
+			map.put("filename0", "Empty directory or directory does not exists.");
+			logger.info("Empty directory or directory does not exists.");
+			return map;
+		}	
 	}
 	 
 	@GetMapping("/files/online")
