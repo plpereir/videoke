@@ -81,12 +81,70 @@ function loadYoutubeMusic()
 	  });
 }
 
+function checkOnline()
+{
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/files/online", false ); // false for synchronous request
+    xmlHttp.send( null );
+    const data = JSON.parse(xmlHttp.responseText);
+	     
+    console.log('verificando se utilizará a versão online ou offline: '+data.online);
+
+    return data.online;
+}
+
+function getPathLocalFile()
+{
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/files/online", false ); // false for synchronous request
+    xmlHttp.send( null );
+    const data = JSON.parse(xmlHttp.responseText);
+	     
+    console.log('path file local player: '+data.path);
+
+    return data.path;
+}
+
+function getFileToPlay(tmpYoutube)
+{
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/files/"+tmpYoutube, false ); // false for synchronous request
+    xmlHttp.send( null );
+    const data = JSON.parse(xmlHttp.responseText);
+	     
+    console.log('file local player: '+data.filename0);
+
+    return data.filename0;
+}
+
 function loadYoutube(tmpYoutube)
 {
-	var s="<iframe width='100%' height='600px' src='https://www.youtube.com/embed/"+tmpYoutube+"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
-	document.getElementById("playYoutube").innerHTML = s;
-	document.getElementById("playYoutube").style.display = 'block';
-	document.getElementById("initalPlayer").style.display = 'none';
+	var s="";
+	if (checkOnline() == "yes")
+	{
+		s="<iframe width='100%' height='600px' src='https://www.youtube.com/embed/"+tmpYoutube+"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+		document.getElementById("playYoutube").innerHTML = s;
+		document.getElementById("playYoutube").style.display = 'block';
+		document.getElementById("initalPlayer").style.display = 'none';
+		document.getElementById("playLocal").style.display = 'none';
+		
+	}else
+	{
+		if (getFileToPlay(tmpYoutube) != "Empty directory or directory does not exists.")
+		{
+			s="<video id='player' src='/video/"+getFileToPlay(tmpYoutube)+"' controls height='75%' width='100%' ></video>";
+			document.getElementById("playLocal").innerHTML = s;
+			document.getElementById("playLocal").style.display = 'block';
+			document.getElementById("initalPlayer").style.display = 'none';
+			document.getElementById("playYoutube").style.display = 'none';	
+		}else
+		{
+			document.getElementById("playLocal").style.display = 'none';
+			document.getElementById("initalPlayer").style.display = 'block';
+			document.getElementById("playYoutube").style.display = 'none';	
+			$('#myModalConfirmNotFoundFile').modal('show');
+		}	
+	}
 	
 	$('#myPlayList').modal('hide');
 	$('#addPlayList').modal('hide');

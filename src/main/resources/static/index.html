@@ -199,14 +199,37 @@
 										</div>
 									</div>
 								</div>
+								
+								<div class="modal hide" tabindex="-1" role="dialog"
+									id="myModalConfirmNotFoundFile">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Não encontramos a música:</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div id="videoNotFound" style="display: block"></div>
+												<div id="videoNotFound" style="display: block"></div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Fechar</button>
+											</div>
+										</div>
+									</div>
+								</div>								
+								
 							</div>
 						</div>
 					</div>
 				</div>
-				<video style="display: none;" id="player"
-					src="/video/yt1s.io-Ministério Adoração e Vida - Abraço de Pai-(480p).mp4"
-					controls height="75%" width="100%">
-				</video>
+				<div id="playLocal" style="display:none">
+					<!-- <video id='player' src='/video/file' controls height='75%' width='100%' ></video>  -->
+				</div>
 				<div id="playYoutube" style="display: none;"></div>
 				<div id="initalPlayer" style="display: block;" align="center">
 					<img src="/img/singers.png" />
