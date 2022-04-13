@@ -117,8 +117,20 @@ function getFileToPlay(tmpYoutube)
     return data.filename0;
 }
 
+function getFilex64(tmpYoutube)
+{
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/files/getfile/"+tmpYoutube, false ); // false for synchronous request
+    xmlHttp.send( null );
+    const data = xmlHttp.responseText;
+	console.log("x64 video:"+data);
+    return data;
+}
+
 function loadYoutube(tmpYoutube)
 {
+document.getElementById("initalPlayerLoading").style.display = 'block';
+
 	var s="";
 	if (checkOnline() == "yes")
 	{
@@ -127,21 +139,24 @@ function loadYoutube(tmpYoutube)
 		document.getElementById("playYoutube").style.display = 'block';
 		document.getElementById("initalPlayer").style.display = 'none';
 		document.getElementById("playLocal").style.display = 'none';
+		document.getElementById("initalPlayerLoading").style.display = 'none';
 		
 	}else
 	{
 		if (getFileToPlay(tmpYoutube) != "Empty directory or directory does not exists.")
 		{
-			s="<video id='player' src='/video/"+getFileToPlay(tmpYoutube)+"' controls height='75%' width='100%' ></video>";
+			s="<video autoplay id='player' src='data:video/mp4;base64,"+getFilex64(tmpYoutube)+"' controls height='75%' width='100%' ></video>";
 			document.getElementById("playLocal").innerHTML = s;
 			document.getElementById("playLocal").style.display = 'block';
 			document.getElementById("initalPlayer").style.display = 'none';
 			document.getElementById("playYoutube").style.display = 'none';	
+			document.getElementById("initalPlayerLoading").style.display = 'none';
 		}else
 		{
 			document.getElementById("playLocal").style.display = 'none';
 			document.getElementById("initalPlayer").style.display = 'block';
 			document.getElementById("playYoutube").style.display = 'none';	
+			document.getElementById("initalPlayerLoading").style.display = 'none';
 			$('#myModalConfirmNotFoundFile').modal('show');
 		}	
 	}
