@@ -108,13 +108,16 @@ function getPathLocalFile()
 function getFileToPlay(tmpYoutube)
 {
 	var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "/files/"+tmpYoutube, false ); // false for synchronous request
+    //xmlHttp.open( "GET", "/files/"+tmpYoutube, false ); // false for synchronous request
+    xmlHttp.open( "GET", "/movies/getFileNameById/"+tmpYoutube, false );
     xmlHttp.send( null );
-    const data = JSON.parse(xmlHttp.responseText);
+    const data =xmlHttp.responseText;
 	     
-    console.log('file local player: '+data.filename0);
+    console.log('file local player: '+data);
 
-    return data.filename0;
+    return data;
+    
+    
 }
 
 function getFilex64(tmpYoutube)
@@ -129,7 +132,6 @@ function getFilex64(tmpYoutube)
 
 function loadYoutube(tmpYoutube)
 {
-document.getElementById("initalPlayerLoading").style.display = 'block';
 
 	var s="";
 	if (checkOnline() == "yes")
@@ -143,6 +145,8 @@ document.getElementById("initalPlayerLoading").style.display = 'block';
 		
 	}else
 	{
+			document.getElementById("listSingers").style.display = 'none';
+			document.getElementById("listLoandingSingers").style.display = 'block';
 		if (getFileToPlay(tmpYoutube) != "Empty directory or directory does not exists.")
 		{
 			s="<video autoplay id='player' src='data:video/mp4;base64,"+getFilex64(tmpYoutube)+"' controls height='75%' width='100%' ></video>";
@@ -164,7 +168,12 @@ document.getElementById("initalPlayerLoading").style.display = 'block';
 	$('#myPlayList').modal('hide');
 	$('#addPlayList').modal('hide');
 }
-
+function hidesingers(tmpYoutube)
+{
+	document.getElementById("listSingers").style.display = 'none';
+	document.getElementById("listLoandingSingers").style.display = 'block';
+	setTimeout(loadYoutube(tmpYoutube), 1000);
+}
 function deleteSingerList(tmpRequestNumber)
 {
 	var xmlHttp = new XMLHttpRequest();
@@ -229,7 +238,7 @@ function searchSingers()
               tmp += "<button style='margin-top:-15px;' onclick='deleteSingerList(&quot;"+value+"&quot;)' type='button' class='btn btn-danger'>Remover da Lista</button> - "; 
 			}
 			if (key=="songID")
-			tmp +=  "<button style='margin-top:-15px;' onclick='loadYoutube(&quot;"+value+"&quot;); deleteSingerList(&quot;"+req+"&quot;)' type='button' class='btn btn-success'>Tocar Música</button>  - ";
+			tmp +=  "<button style='margin-top:-15px;' onclick='hidesingers(&quot;"+value+"&quot;); deleteSingerList(&quot;"+req+"&quot;)' type='button' class='btn btn-success'>Tocar Música</button>  - ";
              if (key=="name")
 			tmp += "<b style='font-size: 1.6rem;'>"+value +"</b> - ";
 			if (key=="songTitle")
@@ -244,14 +253,21 @@ function searchSingers()
         
 }
 
-
 function searchMovies()
 {
-	document.getElementById("listSongs").style.display = 'none';
-	document.getElementById("listLoading").style.display = 'block';
+	//document.getElementById("listSongs").style.display = 'none';
+	//document.getElementById("listLoading").style.display = 'block';
+	
+	console.log("ocultar janelas");
 	
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "/movies/findbytitle/"+txtSearch.value, false ); // false for synchronous request
+    if(checkOnline()=="yes")
+    {
+	    xmlHttp.open( "GET", "/movies/findbytitle/"+txtSearch.value, false ); // false for synchronous request
+	}else
+	{
+		xmlHttp.open( "GET", "/movies/findbytitleoffline/"+txtSearch.value, false ); // false for synchronous request
+	}
     xmlHttp.send( null );
     const data = JSON.parse(xmlHttp.responseText);
     /*
@@ -298,6 +314,14 @@ function searchMovies()
 	document.getElementById("listLoading").style.display = 'none';
 
 }
+
+function hideProcess()
+{
+	document.getElementById("listSongs").style.display = 'none';
+	document.getElementById("listLoading").style.display = 'block';
+	setTimeout(searchMovies, 1000);
+}
+
 
 function deleteYoutube()
 {

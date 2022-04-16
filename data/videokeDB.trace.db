@@ -2380,3 +2380,18 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:/Users/pedro
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 66 more
+2022-04-14 01:57:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MOVIESSET" not found; SQL statement:
+UPDATE MOVIESSET LOCAL_FILE_NAME=? WHERE MOVIE_ID = ? [42102-200]
+2022-04-14 02:00:19 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * MOVIES[*] WHERE LOCAL_FILE_NAME IS NOT NULL"; SQL statement:
+select * movies where local_file_name is not null [42000-200]
+2022-04-14 02:00:35 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * MOVIES[*] WHERE LOCAL_FILE_NAME NOT NULL"; SQL statement:
+select * movies where local_file_name not null [42000-200]
+2022-04-14 02:00:44 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * MOVIES[*] WHERE LOCAL_FILE_NAME <>"""""; SQL statement:
+select * movies where local_file_name <>"" [42000-200]
+2022-04-15 02:07:19 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELELCT[*] MOVIE_ID FROM MOVIES WHERE LOCAL_FILE_NAME IS NULL"; expected "SET, SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"; SQL statement:
+selelct movie_id from movies where local_file_name is null [42001-200]

@@ -41,4 +41,21 @@ public interface RepositoryMovie  extends JpaRepository<ModelMovie, Long> {
     @Query(value =  "SELECT MOVIE_TITLE FROM MOVIES where MOVIE_ID = :MovieId", nativeQuery = true)
     String gettitlebyid(@Param("MovieId") String MovieId);
 
+    @Query(value =  "SELECT LOCAL_FILE_NAME FROM MOVIES where MOVIE_ID = :MovieId", nativeQuery = true)
+    String getFileNameById(@Param("MovieId") String MovieId);    
+    
+    @Modifying
+    @Query(value =  "UPDATE MOVIES SET LOCAL_FILE_NAME=:fileName WHERE MOVIE_ID = :MovieId", nativeQuery = true)
+    @Transactional
+    void updateMovie(@Param("MovieId") String MovieId, @Param("fileName") String fileName);
+    
+    @Query(value =  "SELECT * FROM MOVIES where (LOCAL_FILE_NAME IS NOT NULL) AND (MOVIE_TITLE like %:MovieTitle%)", nativeQuery = true)
+    List<ModelMovie> findByMovieTitleOffLine(@Param("MovieTitle") String MovieTitle);
+    
+    @Query(value =  "SELECT * FROM MOVIES where (LOCAL_FILE_NAME IS NOT NULL)", nativeQuery = true)
+    List<ModelMovie> findAllOffLine();
+
+    @Query(value =  "SELECT * FROM MOVIES where (LOCAL_FILE_NAME IS NULL)", nativeQuery = true)
+    List<ModelMovie> findAllWithoutFile();
+
 }

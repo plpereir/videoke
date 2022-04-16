@@ -20,6 +20,16 @@ public class ModelMovie {
 	private String channelId;
 	@Column(name = "channelTitle")
 	private String channelTitle;
+	@Column(name = "localFileName")
+	private String localFileName;
+	
+	public String getLocalFileName() {
+		return localFileName;
+	}
+
+	public void setLocalFileName(String localFileName) {
+		this.localFileName = localFileName;
+	}
 
 	public ModelMovie() {
 	}

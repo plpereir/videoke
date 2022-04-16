@@ -41,6 +41,9 @@ public class ControllerJSONMovie {
 	
 	@Autowired
 	private RepositoryMovie repositoryMovie;
+	
+	@Autowired
+	private ControllerLocalFile cLF;
 
 	@PostMapping(path = "movies/add", 
 	        consumes = MediaType.APPLICATION_JSON_VALUE, 
@@ -126,14 +129,80 @@ public class ControllerJSONMovie {
 		return modelMoviesList;
 	}
 	
+	@GetMapping("movies/updateall")
+	public List<ModelMovie> updateMovies()
+	{
+		List<ModelMovie> modelMoviesList = new ArrayList<ModelMovie>();
+		modelMoviesList.addAll(repositoryMovie.findAllWithoutFile());
+		int i=0;
+		for(ModelMovie mm:modelMoviesList)
+		{
+			Map<String, String> map = cLF.getFiles(mm.getMovieId());
+			if (map.get("filename0")!="Empty directory or directory does not exists.")
+			{
+				repositoryMovie.updateMovie(mm.getMovieId(), map.get("filename0"));
+				logger.info("items: "+String.valueOf(i)+" - "+mm.getMovieId()+" - "+map.get("filename0"));
+			}
+		}
+		
+		return modelMoviesList;
+	}
+	
 	@GetMapping("movies/findbytitle/{title}")
 	public List<ModelMovie> findMoviesByTitle(@PathVariable String title)
 	{
 		List<ModelMovie> modelMoviesList = new ArrayList<ModelMovie>();
-		modelMoviesList.addAll(repositoryMovie.findByMovieTitle(title.replace(" ", "%").toUpperCase()));
-		return modelMoviesList;
+		logger.info("pegando informação se é está online: "+configs.getOnLine().toString());
+		if (configs.getOnLine().toLowerCase().contains("yes"))
+		//if(true)
+		{
+			
+			modelMoviesList.addAll(repositoryMovie.findByMovieTitle(title.replace(" ", "%").toUpperCase()));
+			return modelMoviesList;
+		}else
+		{
+			List<ModelMovie> modelMoviesListOffline = new ArrayList<ModelMovie>();
+			modelMoviesList.addAll(repositoryMovie.findByMovieTitle(title.replace(" ", "%").toUpperCase()));
+			for(ModelMovie mm:modelMoviesList)
+			{
+				Map<String, String> map = cLF.getFiles(mm.getMovieId());
+				if (map.get("filename0")!="Empty directory or directory does not exists.")
+				{
+					modelMoviesListOffline.add(mm);
+				}
+			}
+			return modelMoviesListOffline;
+		}
 	}
 	
+	@GetMapping("movies/findbytitleoffline/{title}")
+	public List<ModelMovie> findByTitleOffline(@PathVariable String title)
+	{
+		List<ModelMovie> modelMoviesList = new ArrayList<ModelMovie>();
+		logger.info("pegando informação se é está online: "+configs.getOnLine().toString());
+		if (configs.getOnLine().toLowerCase().contains("yes"))
+		//if(true)
+		{
+			
+			modelMoviesList.addAll(repositoryMovie.findByMovieTitle(title.replace(" ", "%").toUpperCase()));
+			return modelMoviesList;
+		}else
+		{
+			List<ModelMovie> modelMoviesListOffline = new ArrayList<ModelMovie>();
+			modelMoviesListOffline.addAll(repositoryMovie.findByMovieTitleOffLine(title.replace(" ", "%").toUpperCase()));
+			/*
+			for(ModelMovie mm:modelMoviesList)
+			{
+				Map<String, String> map = cLF.getFiles(mm.getMovieId());
+				if (map.get("filename0")!="Empty directory or directory does not exists.")
+				{
+					modelMoviesListOffline.add(mm);
+				}
+			}*/
+			return modelMoviesListOffline;
+		}
+	}
+
 	@GetMapping("movies/findbyId/{Id}")
 	public List<ModelMovie> findMoviesById(@PathVariable String Id)
 	{
@@ -147,6 +216,12 @@ public class ControllerJSONMovie {
 	public String gettitlebyid(@PathVariable String Id)
 	{		
 		return repositoryMovie.gettitlebyid(Id);
+	}
+	
+	@GetMapping("movies/getFileNameById/{Id}")
+	public String getFileNameById(@PathVariable String Id)
+	{		
+		return repositoryMovie.getFileNameById(Id);
 	}
 	
 	@PostMapping(path = "/movies/new", 

@@ -32,7 +32,7 @@ public class UtilitiesFiles  implements FilenameFilter {
  
 	public String encodeFileToBase64Binary(String fileName) throws IOException {
 
-		File file = new File("/Users/pedro.pereira/Downloads/"+fileName);
+		File file = new File("C:\\Users\\User\\Downloads\\videoke\\"+fileName);
 		byte[] bytes = loadFile(file);
 		byte[] encoded = Base64.encodeBase64(bytes);
 		String encodedString = new String(encoded);

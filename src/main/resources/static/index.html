@@ -126,7 +126,7 @@
 											<input type="text" style="height: 30px; margin-top: 15px"
 												class="span6" name="txtSearch" id="txtSearch"
 												placeholder="Digite a música que deseja encontrar" />
-											<button onclick="searchMovies()" type="button"
+											<button onclick="hideProcess();" type="button"
 												class="btn btn-primary">Buscar</button>
 										</p>
 
@@ -261,7 +261,7 @@ var input = document.getElementById("txtSearch");
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
-   searchMovies();
+   hideProcess();
   }
 });
 </script>

@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.videoke.thevoicefamily.configs.Configs;
+import com.videoke.thevoicefamily.repository.RepositoryMovie;
 import com.videoke.thevoicefamily.utils.UtilitiesFiles;
 
 @RestController
 public class ControllerLocalFile {
+	@Autowired
+	private RepositoryMovie repositoryMovie;
+	
 	@Autowired
 	private Configs configs;
 
@@ -81,10 +85,9 @@ public class ControllerLocalFile {
 	@GetMapping("/files/getfile/{fileName}")
 	public String getfile(@PathVariable String fileName) throws IOException 
 	{
-		UtilitiesFiles uf = new UtilitiesFiles(fileName);
-		Map<String, String> map = this.getFiles(fileName);
-		return uf.encodeFileToBase64Binary(map.get("filename0"));
-
+		String tmp = repositoryMovie.getFileNameById(fileName);
+		UtilitiesFiles uf = new UtilitiesFiles(tmp);
+		return uf.encodeFileToBase64Binary(tmp);
 	}
 	
 }
