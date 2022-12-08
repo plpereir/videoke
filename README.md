@@ -10,4 +10,4 @@ When use on-line version, the app get videos from youtube embedded into app.
 
 To use local, is necessary install java jdk and maven. execute by command line the starting application.
 
-update - 20221208
+update - 20221208-02
